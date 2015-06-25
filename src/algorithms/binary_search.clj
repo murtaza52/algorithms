@@ -1,9 +1,15 @@
 (ns algorithms.binary-search
   (:require [clojure.tools.trace :refer [trace]]))
 
+;; Creating a seq of integers. 
 (def int-vec #(take % (range)))
 
+
 (def map-vec (fn[n](take n (iterate #(update-in % [:id] inc) {:id 1}))))
+(def map-vec (fn[n](take n (map #(assoc {} :id %) (range)))))
+
+(map-vec 3)
+
 (def keyfn-map :id)
 
 (defn binary-search
@@ -20,9 +26,3 @@
 
 (time (binary-search (int-vec 10000) 652))
 (time (binary-search (map-vec 10000) keyfn-map {:id 87}))
-
-
-
-
-
-
